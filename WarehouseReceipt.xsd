@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.magaya.com/XMLSchema/V1" elementFormDefault="qualified" xmlns="http://www.magaya.com/XMLSchema/V1" xmlns:mstns="http://www.magaya.com/XMLSchema/V1" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+  <xs:include schemaLocation="Common.xsd"/>
+
+  <!-- Definition of a Warehouse Receipt -->
+  <xs:complexType name="WarehouseReceiptType">
+    <xs:all>
+      <!-- Creation date for the Warehouse Receipt -->
+      <xs:element name="CreatedOn" type="xs:dateTime" minOccurs="1" maxOccurs="1"/>
+      <!-- Warehouse Receipt number -->
+      <xs:element name="Number" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <!-- Employee that created the Warehouse Receipt -->
+      <xs:element name="CreatedByName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Version of the Warehouse Receipt -->
+      <xs:element name="Version" type="xs:byte" minOccurs="0" maxOccurs="1"/>
+      <!-- Status of the Warehouse Receipt -->
+      <xs:element name="Status" type="WHRStatusType" minOccurs="0" maxOccurs="1"/>
+      <!-- Mode of transportation if the cargo in going to be moved -->
+      <xs:element name="ModeOfTransportation" type="ModeOfTransportationType" minOccurs="0" maxOccurs="1"/>
+      <!-- Mode of transportation code if the cargo in going to be moved -->
+      <xs:element name="ModeOfTransportCode" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Company that issued the Warehouse Receipt -->
+      <xs:element name="IssuedBy" type="EntityType" minOccurs="0" maxOccurs="1"/>
+      <!-- Address of the company that issued the Warehouse Receipt -->
+      <xs:element name="IssuedByAddress" type="AddressType" minOccurs="0" maxOccurs="1"/>
+      <!-- Name of the company that issued the Warehouse Receipt -->
+      <xs:element name="IssuedByName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Shipper name -->
+      <xs:element name="ShipperName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Shipper address -->
+      <xs:element name="ShipperAddress" type="AddressType" minOccurs="0" maxOccurs="1"/>
+      <!-- Shipper entity -->
+      <xs:element name="Shipper" type="EntityType" minOccurs="0" maxOccurs="1"/>
+      <!-- Consignee name -->
+      <xs:element name="ConsigneeName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Consignee address -->
+      <xs:element name="ConsigneeAddress" type="AddressType" minOccurs="0" maxOccurs="1"/>
+      <!-- Consignee entity -->
+      <xs:element name="Consignee" type="EntityType" minOccurs="0" maxOccurs="1"/>
+      <!-- Destination agent name in case of export -->
+      <xs:element name="DestinationAgentName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Destination agent entity in case of export -->
+      <xs:element name="DestinationAgent" type="EntityType" minOccurs="0" maxOccurs="1"/>
+      <!-- Inland carrier entity -->
+      <xs:element name="Carrier" type="EntityType" minOccurs="0" maxOccurs="1"/>
+      <!-- Inland carrier name -->
+      <xs:element name="CarrierName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Inland carrier tracking number -->
+      <xs:element name="CarrierTrackingNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Inland carrier PRO number -->
+      <xs:element name="CarrierPRONumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Inland carrier driver name -->
+      <xs:element name="DriverName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Inland carrier driver license -->
+      <xs:element name="DriverLicenseNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Notes -->
+      <xs:element name="Notes" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Merchandise received in this Warehouse Receipt -->
+      <xs:element name="Items" type="ItemList" minOccurs="0" maxOccurs="1"/>
+      <!-- Measurement units used in this Warehouse Receipt -->
+      <xs:element name="MeasurementUnits" type="MeasurementUnitsType" minOccurs="0" maxOccurs="1"/>
+      <!-- Magaya network ID of the system that created this Warehouse Receipt -->
+      <xs:element name="CreatorNetworkID" type="xs:long" minOccurs="0" maxOccurs="1"/>
+      <!-- Charges that apply to this Warehouse Receipt -->
+      <xs:element name="Charges" type="ChargeList" minOccurs="0" maxOccurs="1"/>
+      <!-- Events related to this Warehouse Receipt -->
+      <xs:element name="Events" type="EventList" minOccurs="0" maxOccurs="1"/>
+      <!-- Division that created this Warehouse Receipt -->
+      <xs:element name="Division" type="EntityType" minOccurs="0" maxOccurs="1"/>
+      <!-- Total Pieces -->
+      <xs:element name="TotalPieces" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+      <!-- Total Weight -->
+      <xs:element name="TotalWeight" type="WeightValue" minOccurs="0" maxOccurs="1"/>
+      <!-- Total Volume -->
+      <xs:element name="TotalVolume" type="VolumeValue" minOccurs="0" maxOccurs="1"/>
+      <!-- Total Value -->
+      <xs:element name="TotalValue" type="MoneyValue" minOccurs="0" maxOccurs="1"/>
+      <!-- Total Volume Weight -->
+      <xs:element name="TotalVolumeWeight" type="VolumeWeightValue" minOccurs="0" maxOccurs="1"/>
+      <!-- Total Chargeable Weight -->
+      <xs:element name="ChargeableWeight" type="WeightValue" minOccurs="0" maxOccurs="1"/>
+      <!-- Port of origin in case of export -->
+      <xs:element name="OriginPort" type="PortType" minOccurs="0" maxOccurs="1"/>
+      <!-- Port of destination in case of export -->
+      <xs:element name="DestinationPort" type="PortType" minOccurs="0" maxOccurs="1"/>
+      <!-- Supplier name -->
+      <xs:element name="SupplierName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Supplier address -->
+      <xs:element name="SupplierAddress" type="AddressType" minOccurs="0" maxOccurs="1"/>
+      <!-- Supplier entity -->
+      <xs:element name="Supplier" type="EntityType" minOccurs="0" maxOccurs="1"/>
+      <!-- Supplier invoice number -->
+      <xs:element name="SupplierInvoiceNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Supplier purchase order number -->
+      <xs:element name="SupplierPONumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- If the Warehouse Receipt was created from a quote this is the quotation number -->
+      <xs:element name="FromQuoteNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- True if this transaction has Attachments -->
+      <xs:element name="HasAttachments" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+      <!-- Attachments -->
+      <xs:element name="Attachments" type="AttachmentList" minOccurs="0" maxOccurs="1"/>
+      <!-- Bonded entry type -->
+      <xs:element name="BondedEntry" type="BondedEntryType" minOccurs="0" maxOccurs="1"/>
+      <!-- Bonded entry number -->
+      <xs:element name="BondedEntryNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Bonded entry date -->
+      <xs:element name="BondedEntryDate" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+      <!-- Booking number of the main carrier -->
+      <xs:element name="CarrierBookingNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- If the Warehouse Receipt was created from a booking in the system this is the booking number -->
+      <xs:element name="FromBookingNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Main carrier that will do the exportation -->
+      <xs:element name="MainCarrier" type="EntityType" minOccurs="0" maxOccurs="1"/>
+      <!-- Client that will pay for the charges -->
+      <xs:element name="BillingClient" type="EntityType" minOccurs="0" maxOccurs="1"/>
+      <!-- Last line item in this Warehouse Receipt -->
+      <xs:element name="LastItemID" type="xs:short" minOccurs="0" maxOccurs="1"/>
+      <!-- URL to track this Warehouse Receipt -->
+      <xs:element name="URL" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Custom fields defined by the user -->
+      <xs:element name="CustomFields" type="CustomFieldList" minOccurs="0" maxOccurs="1"/>
+			<!-- True if this Warehouse Receipt was placed online -->
+			<xs:element name="IsOnline" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+      <!-- Hold Status of WHReceipt -->
+      <xs:element name="HoldStatus" type="HoldStatusType" minOccurs="0" maxOccurs="1" />
+      <!-- True if this Warehouse Receipt was liquidated -->
+      <xs:element name="IsLiquidated" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+    </xs:all>
+    <!-- Unique identifier (GUID) of the transaction -->
+    <xs:attribute name="GUID" type="GUIDType" use="optional" />
+    <!-- Type that classifies this type of transaction that is used when calling API methods -->
+    <xs:attribute name="Type" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <!-- Warehouse Receipt status -->
+  <xs:simpleType name="WHRStatusType">
+    <xs:restriction base="xs:string">
+      <!-- Cargo is in the warehouse -->
+      <xs:enumeration value="OnHand" />
+      <!-- Cargo is being processed in a shipment -->
+      <xs:enumeration value="InProcess" />
+      <!-- Cargo departed from the warehouse and is on its way to the destination -->
+      <xs:enumeration value="InTransit" />
+      <!-- Cargo arrived at destination -->
+      <xs:enumeration value="AtDestination" />
+      <!-- Cargo delivered to the final consignee -->
+      <xs:enumeration value="Delivered" />
+      <!-- Warehouse Receipt has no items -->
+      <xs:enumeration value="Empty" />
+      <!-- Used for pickup orders when they are on their way to the warehouse -->
+      <xs:enumeration value="Arriving" />
+      <!-- Warehouse Receipt that was created but the cargo has not been allocated in the warehouse -->
+      <xs:enumeration value="Pending" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Types of bonded entries -->
+  <xs:simpleType name="BondedEntryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Other" />
+      <xs:enumeration value="Domestic" />
+      <xs:enumeration value="Bonded" />
+      <xs:enumeration value="ContainerFreightStation" />
+      <xs:enumeration value="GeneralOrder" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Warehouse Receipt element -->
+  <xs:element name="WarehouseReceipt" type="WarehouseReceiptType"/>
+
+  <!-- Warehouse Receipt list element -->
+  <xs:element name="WarehouseReceipts" type="WarehouseReceiptList"/>
+
+  <!-- Warehouse Receipt list definition -->
+  <xs:complexType name="WarehouseReceiptList">
+    <xs:sequence>
+      <!-- Describes an individual warehouse receipt in the list -->
+      <xs:element name="WarehouseReceipt" type="WarehouseReceiptType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
