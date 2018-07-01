@@ -1,0 +1,1719 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s0="urn:CSSoapService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:atls="http://tempuri.org/vc/atl/server/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:CSSoapService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="urn:CSSoapService">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:simpleType name="api_session_error">
+        <s:restriction base="s:string">
+          <s:enumeration value="license_in_use" />
+          <s:enumeration value="over_credit_limit" />
+          <s:enumeration value="no_capacity_in_trip" />
+          <s:enumeration value="service_unreachable" />
+          <s:enumeration value="invalid_operation" />
+          <s:enumeration value="error_saving_to_database" />
+          <s:enumeration value="unknown_object" />
+          <s:enumeration value="xml_validation_error" />
+          <s:enumeration value="invalid_xml" />
+          <s:enumeration value="transaction_not_found" />
+          <s:enumeration value="access_denied" />
+          <s:enumeration value="too_many_open_sessions" />
+          <s:enumeration value="no_error" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="contact_info2">
+        <s:sequence>
+          <s:element name="id" type="s:int" />
+          <s:element name="name" type="s:string" />
+          <s:element name="email" type="s:string" />
+          <s:element name="web_site" type="s:string" />
+          <s:element name="wan_ip" type="s:string" />
+          <s:element name="lan_ip" type="s:string" />
+          <s:element name="port" type="s:short" />
+          <s:element name="connect_type" type="s:unsignedByte" />
+          <s:element name="net_version" type="s:unsignedByte" />
+          <s:element name="availability" type="s:int" />
+          <s:element name="version" type="s:int" />
+          <s:element name="loc_lic" type="s:short" />
+          <s:element name="rem_lic" type="s:short" />
+          <s:element name="services" type="s:int" />
+          <s:element name="lan_port" type="s:short" />
+          <s:element name="wms_lic" type="s:short" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="contact_info">
+        <s:sequence>
+          <s:element name="id" type="s:int" />
+          <s:element name="name" type="s:string" />
+          <s:element name="email" type="s:string" />
+          <s:element name="web_site" type="s:string" />
+          <s:element name="wan_ip" type="s:string" />
+          <s:element name="lan_ip" type="s:string" />
+          <s:element name="port" type="s:short" />
+          <s:element name="connect_type" type="s:unsignedByte" />
+          <s:element name="net_version" type="s:unsignedByte" />
+          <s:element name="availability" type="s:int" />
+          <s:element name="version" type="s:int" />
+          <s:element name="loc_lic" type="s:short" />
+          <s:element name="rem_lic" type="s:short" />
+          <s:element name="services" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TestConnectionIn">
+    <wsdl:part name="in_cookie" type="s:int" />
+    <wsdl:part name="id" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="TestConnectionOut">
+    <wsdl:part name="out_cookie" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="StartTrackingIn">
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="StartTrackingOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="services" type="s:int" />
+    <wsdl:part name="company_info" type="s:string" />
+    <wsdl:part name="cookie" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetTrackingTransactionIn">
+    <wsdl:part name="app" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTrackingTransactionOut">
+    <wsdl:part name="trans_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttachmentIn">
+    <wsdl:part name="app" type="s:string" />
+    <wsdl:part name="trans_uuid" type="s:string" />
+    <wsdl:part name="attach_id" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetAttachmentOut">
+    <wsdl:part name="attach_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentIn">
+    <wsdl:part name="trans_uuid" type="s:string" />
+    <wsdl:part name="doc_id" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentOut">
+    <wsdl:part name="attach_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InvitationFromPeerIn">
+    <wsdl:part name="id" type="s:int" />
+    <wsdl:part name="uuid" type="s:string" />
+    <wsdl:part name="employee" type="s:string" />
+    <wsdl:part name="body" type="s:string" />
+    <wsdl:part name="company" type="s:string" />
+    <wsdl:part name="country" type="s:string" />
+    <wsdl:part name="city" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InvitationFromPeerOut">
+    <wsdl:part name="return" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="AnswerInvitationIn">
+    <wsdl:part name="bAccepted" type="s:int" />
+    <wsdl:part name="uuid" type="s:string" />
+    <wsdl:part name="employee" type="s:string" />
+    <wsdl:part name="body" type="s:string" />
+    <wsdl:part name="company" type="s:string" />
+    <wsdl:part name="country" type="s:string" />
+    <wsdl:part name="city" type="s:string" />
+    <wsdl:part name="pInfo" type="s0:contact_info" />
+  </wsdl:message>
+  <wsdl:message name="AnswerInvitationOut">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pInfo" type="s0:contact_info" />
+  </wsdl:message>
+  <wsdl:message name="AnswerInvitation2In">
+    <wsdl:part name="bAccepted" type="s:int" />
+    <wsdl:part name="uuid" type="s:string" />
+    <wsdl:part name="employee" type="s:string" />
+    <wsdl:part name="body" type="s:string" />
+    <wsdl:part name="company" type="s:string" />
+    <wsdl:part name="country" type="s:string" />
+    <wsdl:part name="city" type="s:string" />
+    <wsdl:part name="pInfo" type="s0:contact_info2" />
+  </wsdl:message>
+  <wsdl:message name="AnswerInvitation2Out">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="pInfo" type="s0:contact_info2" />
+  </wsdl:message>
+  <wsdl:message name="StartSessionIn">
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="pass" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="StartSessionOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="access_key" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="EndSessionIn">
+    <wsdl:part name="access_key" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="EndSessionOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trans_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetTransactionIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="trans_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetTransactionOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="error_desc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTransRangeByDateIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="start_date" type="s:string" />
+    <wsdl:part name="end_date" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetTransRangeByDateOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trans_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTransactionIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTransactionOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+  </wsdl:message>
+  <wsdl:message name="RenameTransactionIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="new_name" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RenameTransactionOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+  </wsdl:message>
+  <wsdl:message name="GetWorkingPortsIn" />
+  <wsdl:message name="GetWorkingPortsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="ports_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTripScheduleIn">
+    <wsdl:part name="arr_start_date" type="s:string" />
+    <wsdl:part name="arr_end_date" type="s:string" />
+    <wsdl:part name="dep_start_date" type="s:string" />
+    <wsdl:part name="dep_end_date" type="s:string" />
+    <wsdl:part name="org_port" type="s:string" />
+    <wsdl:part name="dest_port" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTripScheduleOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trip_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BookingRequestIn">
+    <wsdl:part name="booking_xml" type="s:string" />
+    <wsdl:part name="trip_uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BookingRequestOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="booking_number" type="s:string" />
+    <wsdl:part name="result_string" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="StartTracking2In">
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="StartTracking2Out">
+    <wsdl:part name="return" type="s:int" />
+    <wsdl:part name="services" type="s:int" />
+    <wsdl:part name="company_info" type="s:string" />
+    <wsdl:part name="user_info" type="s:string" />
+    <wsdl:part name="cookie" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetPackageTypesIn" />
+  <wsdl:message name="GetPackageTypesOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="pack_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CancelBookingIn">
+    <wsdl:part name="booking_uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CancelBookingOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomFieldDefinitionsIn">
+    <wsdl:part name="type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomFieldDefinitionsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="field_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetItemFromVINIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="vin" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetItemFromVINOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="item_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetShipmentStatusIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="status" type="s:string" />
+    <wsdl:part name="shipment_uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetShipmentStatusOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+  </wsdl:message>
+  <wsdl:message name="GetMagayaDocumentIn">
+    <wsdl:part name="filename" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMagayaDocumentOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="attach_xml" type="s:string" />
+    <wsdl:part name="error" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountingTransactionsIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountingTransactionsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trans_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRelatedTransactionsIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRelatedTransactionsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trans_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountDefinitionsIn">
+    <wsdl:part name="access_key" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountDefinitionsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="account_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetChargeDefinitionsIn">
+    <wsdl:part name="access_key" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetChargeDefinitionsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="service_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveCurrenciesIn">
+    <wsdl:part name="access_key" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveCurrenciesOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="currency_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryLogIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="start_date" type="s:string" />
+    <wsdl:part name="end_date" type="s:string" />
+    <wsdl:part name="log_entry_type" type="s:int" />
+    <wsdl:part name="trans_type" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="QueryLogOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trans_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPODDataIn">
+    <wsdl:part name="app" type="s:string" />
+    <wsdl:part name="trans_uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPODDataOut">
+    <wsdl:part name="pod_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClientRatesIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="client_uuid" type="s:string" />
+    <wsdl:part name="org_port" type="s:string" />
+    <wsdl:part name="dest_port" type="s:string" />
+    <wsdl:part name="method" type="s:string" />
+    <wsdl:part name="include_standard" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetClientRatesOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="rate_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStandardRatesIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="org_port" type="s:string" />
+    <wsdl:part name="dest_port" type="s:string" />
+    <wsdl:part name="method" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStandardRatesOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="rate_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClientChargeDefinitionsIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="client_uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClientChargeDefinitionsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="charge_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetRateIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="rate_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetRateOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="error_desc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetEntityIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="entity_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetEntityOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="error_desc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEntitiesIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="start_with" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEntitiesOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="entity_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityContactsIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="entity_uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityContactsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="contact_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitSalesOrderIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="sales_order_xml" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="SubmitSalesOrderOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="sales_order_number" type="s:string" />
+    <wsdl:part name="result_string" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitCargoReleaseIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="cargo_release_xml" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="SubmitCargoReleaseOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="cargo_release_number" type="s:string" />
+    <wsdl:part name="result_string" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitShipmentIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="shipment_xml" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="SubmitShipmentOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="shipment_number" type="s:string" />
+    <wsdl:part name="result_string" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEventDefinitionsIn">
+    <wsdl:part name="access_key" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetEventDefinitionsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="event_definition_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetTransactionEventsIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="event_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetTransactionEventsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="error_desc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="order_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="error_desc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetCustomFieldValueIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="field_internal_name" type="s:string" />
+    <wsdl:part name="field_value" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetCustomFieldValueOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+  </wsdl:message>
+  <wsdl:message name="SetApprovalStatusIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="status" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="SetApprovalStatusOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+  </wsdl:message>
+  <wsdl:message name="GetCarrierRatesIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="carrier_uuid" type="s:string" />
+    <wsdl:part name="org_port" type="s:string" />
+    <wsdl:part name="dest_port" type="s:string" />
+    <wsdl:part name="method" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCarrierRatesOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="rate_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityTransactionsIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="entity_uuid" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="start_date" type="s:string" />
+    <wsdl:part name="end_date" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityTransactionsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="acctrans_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryLogJSIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="start_date" type="s:string" />
+    <wsdl:part name="end_date" type="s:string" />
+    <wsdl:part name="log_entry_type" type="s:int" />
+    <wsdl:part name="trans_type" type="s:string" />
+    <wsdl:part name="function" type="s:string" />
+    <wsdl:part name="xml_params" type="s:string" />
+    <wsdl:part name="log_flags" type="s:int" />
+    <wsdl:part name="xml_flags" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="QueryLogJSOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trans_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExistsTransactionIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExistsTransactionOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="exist_trans" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionStatusIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionStatusOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trans_status" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetTrackingUserIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="contact_uuid" type="s:string" />
+    <wsdl:part name="login" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="user_config_xml" type="s:string" />
+    <wsdl:part name="xml_flags" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="SetTrackingUserOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+  </wsdl:message>
+  <wsdl:message name="GetItemDefinitionsByCustomerIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="customer_uuid" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetItemDefinitionsByCustomerOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="def_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInventoryItemsByItemDefinitionIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="uuid" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetInventoryItemsByItemDefinitionOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="item_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionsByBillingClientIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="customer_uuid" type="s:string" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="start_date" type="s:string" />
+    <wsdl:part name="end_date" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionsByBillingClientOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trans_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEntitiesOfTypeIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="start_with" type="s:string" />
+    <wsdl:part name="entity_type" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetEntitiesOfTypeOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="entity_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetWebDocumentIn">
+    <wsdl:part name="trans_uuid" type="s:string" />
+    <wsdl:part name="doc_id" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetWebDocumentOut">
+    <wsdl:part name="document" type="s:string" />
+    <wsdl:part name="document_length" type="s:int" />
+    <wsdl:part name="is_ole_doc" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetFirstTransbyDateIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="start_date" type="s:string" />
+    <wsdl:part name="end_date" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="record_quantity" type="s:int" />
+    <wsdl:part name="backwards_order" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetFirstTransbyDateOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="cookie" type="s:string" />
+    <wsdl:part name="more_results" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetFirstTransbyDateJSIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="start_date" type="s:string" />
+    <wsdl:part name="end_date" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="record_quantity" type="s:int" />
+    <wsdl:part name="backwards_order" type="s:int" />
+    <wsdl:part name="function" type="s:string" />
+    <wsdl:part name="xml_params" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFirstTransbyDateJSOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="cookie" type="s:string" />
+    <wsdl:part name="more_results" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetNextTransbyDateIn">
+    <wsdl:part name="cookie" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNextTransbyDateOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="cookie" type="s:string" />
+    <wsdl:part name="trans_list_xml" type="s:string" />
+    <wsdl:part name="more_results" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="GetTransRangeByDateJSIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="start_date" type="s:string" />
+    <wsdl:part name="end_date" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="function" type="s:string" />
+    <wsdl:part name="xml_params" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTransRangeByDateJSOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trans_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSecureTrackingTransactionIn">
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="pass" type="s:string" />
+    <wsdl:part name="app" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSecureTrackingTransactionOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="trans_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InvokeIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="operation" type="s:string" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="input" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InvokeOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="output" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateSalesOrderIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="sales_order_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidateSalesOrderOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="result_xml" type="s:string" />
+    <wsdl:part name="result_string" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CancelSalesOrderIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="sales_order_number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CancelSalesOrderOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="result_string" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetTransactionChargesIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="charge_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetTransactionChargesOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="error_desc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePODIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="trans_type" type="s:string" />
+    <wsdl:part name="trans_uuid" type="s:string" />
+    <wsdl:part name="pod_xml" type="s:string" />
+    <wsdl:part name="delivered_items_xml" type="s:string" />
+    <wsdl:part name="undelivered_items_xml" type="s:string" />
+    <wsdl:part name="internal_comments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePODOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="error_desc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ApproveOrderIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="approved_by" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ApproveOrderOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+  </wsdl:message>
+  <wsdl:message name="SubmitPickupOrderIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="pickup_order_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitPickupOrderOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="pickup_order_number" type="s:string" />
+    <wsdl:part name="result_string" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetAttachmentIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="attach_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetAttachmentOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="error_desc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAttachmentsIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="flags" type="s:int" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAttachmentsOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+    <wsdl:part name="attach_list_xml" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetParentEntityIn">
+    <wsdl:part name="access_key" type="s:int" />
+    <wsdl:part name="entity_guid" type="s:string" />
+    <wsdl:part name="parent_guid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetParentEntityOut">
+    <wsdl:part name="return" type="s0:api_session_error" />
+  </wsdl:message>
+  <wsdl:portType name="CSSoapServiceSoap">
+    <wsdl:operation name="TestConnection">
+      <wsdl:input message="s0:TestConnectionIn" />
+      <wsdl:output message="s0:TestConnectionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartTracking">
+      <wsdl:input message="s0:StartTrackingIn" />
+      <wsdl:output message="s0:StartTrackingOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrackingTransaction">
+      <wsdl:input message="s0:GetTrackingTransactionIn" />
+      <wsdl:output message="s0:GetTrackingTransactionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachment">
+      <wsdl:input message="s0:GetAttachmentIn" />
+      <wsdl:output message="s0:GetAttachmentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <wsdl:input message="s0:GetDocumentIn" />
+      <wsdl:output message="s0:GetDocumentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationFromPeer">
+      <wsdl:input message="s0:InvitationFromPeerIn" />
+      <wsdl:output message="s0:InvitationFromPeerOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AnswerInvitation">
+      <wsdl:input message="s0:AnswerInvitationIn" />
+      <wsdl:output message="s0:AnswerInvitationOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AnswerInvitation2">
+      <wsdl:input message="s0:AnswerInvitation2In" />
+      <wsdl:output message="s0:AnswerInvitation2Out" />
+    </wsdl:operation>
+    <wsdl:operation name="StartSession">
+      <wsdl:input message="s0:StartSessionIn" />
+      <wsdl:output message="s0:StartSessionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EndSession">
+      <wsdl:input message="s0:EndSessionIn" />
+      <wsdl:output message="s0:EndSessionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransaction">
+      <wsdl:input message="s0:GetTransactionIn" />
+      <wsdl:output message="s0:GetTransactionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTransaction">
+      <wsdl:input message="s0:SetTransactionIn" />
+      <wsdl:output message="s0:SetTransactionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransRangeByDate">
+      <wsdl:input message="s0:GetTransRangeByDateIn" />
+      <wsdl:output message="s0:GetTransRangeByDateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTransaction">
+      <wsdl:input message="s0:DeleteTransactionIn" />
+      <wsdl:output message="s0:DeleteTransactionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RenameTransaction">
+      <wsdl:input message="s0:RenameTransactionIn" />
+      <wsdl:output message="s0:RenameTransactionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkingPorts">
+      <wsdl:input message="s0:GetWorkingPortsIn" />
+      <wsdl:output message="s0:GetWorkingPortsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTripSchedule">
+      <wsdl:input message="s0:GetTripScheduleIn" />
+      <wsdl:output message="s0:GetTripScheduleOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BookingRequest">
+      <wsdl:input message="s0:BookingRequestIn" />
+      <wsdl:output message="s0:BookingRequestOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartTracking2">
+      <wsdl:input message="s0:StartTracking2In" />
+      <wsdl:output message="s0:StartTracking2Out" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPackageTypes">
+      <wsdl:input message="s0:GetPackageTypesIn" />
+      <wsdl:output message="s0:GetPackageTypesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelBooking">
+      <wsdl:input message="s0:CancelBookingIn" />
+      <wsdl:output message="s0:CancelBookingOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomFieldDefinitions">
+      <wsdl:input message="s0:GetCustomFieldDefinitionsIn" />
+      <wsdl:output message="s0:GetCustomFieldDefinitionsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemFromVIN">
+      <wsdl:input message="s0:GetItemFromVINIn" />
+      <wsdl:output message="s0:GetItemFromVINOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetShipmentStatus">
+      <wsdl:input message="s0:SetShipmentStatusIn" />
+      <wsdl:output message="s0:SetShipmentStatusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMagayaDocument">
+      <wsdl:input message="s0:GetMagayaDocumentIn" />
+      <wsdl:output message="s0:GetMagayaDocumentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingTransactions">
+      <wsdl:input message="s0:GetAccountingTransactionsIn" />
+      <wsdl:output message="s0:GetAccountingTransactionsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelatedTransactions">
+      <wsdl:input message="s0:GetRelatedTransactionsIn" />
+      <wsdl:output message="s0:GetRelatedTransactionsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountDefinitions">
+      <wsdl:input message="s0:GetAccountDefinitionsIn" />
+      <wsdl:output message="s0:GetAccountDefinitionsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChargeDefinitions">
+      <wsdl:input message="s0:GetChargeDefinitionsIn" />
+      <wsdl:output message="s0:GetChargeDefinitionsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveCurrencies">
+      <wsdl:input message="s0:GetActiveCurrenciesIn" />
+      <wsdl:output message="s0:GetActiveCurrenciesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryLog">
+      <wsdl:input message="s0:QueryLogIn" />
+      <wsdl:output message="s0:QueryLogOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPODData">
+      <wsdl:input message="s0:GetPODDataIn" />
+      <wsdl:output message="s0:GetPODDataOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientRates">
+      <wsdl:input message="s0:GetClientRatesIn" />
+      <wsdl:output message="s0:GetClientRatesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardRates">
+      <wsdl:input message="s0:GetStandardRatesIn" />
+      <wsdl:output message="s0:GetStandardRatesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientChargeDefinitions">
+      <wsdl:input message="s0:GetClientChargeDefinitionsIn" />
+      <wsdl:output message="s0:GetClientChargeDefinitionsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetRate">
+      <wsdl:input message="s0:SetRateIn" />
+      <wsdl:output message="s0:SetRateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetEntity">
+      <wsdl:input message="s0:SetEntityIn" />
+      <wsdl:output message="s0:SetEntityOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntities">
+      <wsdl:input message="s0:GetEntitiesIn" />
+      <wsdl:output message="s0:GetEntitiesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityContacts">
+      <wsdl:input message="s0:GetEntityContactsIn" />
+      <wsdl:output message="s0:GetEntityContactsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitSalesOrder">
+      <wsdl:input message="s0:SubmitSalesOrderIn" />
+      <wsdl:output message="s0:SubmitSalesOrderOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitCargoRelease">
+      <wsdl:input message="s0:SubmitCargoReleaseIn" />
+      <wsdl:output message="s0:SubmitCargoReleaseOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitShipment">
+      <wsdl:input message="s0:SubmitShipmentIn" />
+      <wsdl:output message="s0:SubmitShipmentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventDefinitions">
+      <wsdl:input message="s0:GetEventDefinitionsIn" />
+      <wsdl:output message="s0:GetEventDefinitionsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTransactionEvents">
+      <wsdl:input message="s0:SetTransactionEventsIn" />
+      <wsdl:output message="s0:SetTransactionEventsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrder">
+      <wsdl:input message="s0:UpdateOrderIn" />
+      <wsdl:output message="s0:UpdateOrderOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCustomFieldValue">
+      <wsdl:input message="s0:SetCustomFieldValueIn" />
+      <wsdl:output message="s0:SetCustomFieldValueOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetApprovalStatus">
+      <wsdl:input message="s0:SetApprovalStatusIn" />
+      <wsdl:output message="s0:SetApprovalStatusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierRates">
+      <wsdl:input message="s0:GetCarrierRatesIn" />
+      <wsdl:output message="s0:GetCarrierRatesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityTransactions">
+      <wsdl:input message="s0:GetEntityTransactionsIn" />
+      <wsdl:output message="s0:GetEntityTransactionsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryLogJS">
+      <wsdl:input message="s0:QueryLogJSIn" />
+      <wsdl:output message="s0:QueryLogJSOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExistsTransaction">
+      <wsdl:input message="s0:ExistsTransactionIn" />
+      <wsdl:output message="s0:ExistsTransactionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionStatus">
+      <wsdl:input message="s0:GetTransactionStatusIn" />
+      <wsdl:output message="s0:GetTransactionStatusOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTrackingUser">
+      <wsdl:input message="s0:SetTrackingUserIn" />
+      <wsdl:output message="s0:SetTrackingUserOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemDefinitionsByCustomer">
+      <wsdl:input message="s0:GetItemDefinitionsByCustomerIn" />
+      <wsdl:output message="s0:GetItemDefinitionsByCustomerOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInventoryItemsByItemDefinition">
+      <wsdl:input message="s0:GetInventoryItemsByItemDefinitionIn" />
+      <wsdl:output message="s0:GetInventoryItemsByItemDefinitionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionsByBillingClient">
+      <wsdl:input message="s0:GetTransactionsByBillingClientIn" />
+      <wsdl:output message="s0:GetTransactionsByBillingClientOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntitiesOfType">
+      <wsdl:input message="s0:GetEntitiesOfTypeIn" />
+      <wsdl:output message="s0:GetEntitiesOfTypeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWebDocument">
+      <wsdl:input message="s0:GetWebDocumentIn" />
+      <wsdl:output message="s0:GetWebDocumentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFirstTransbyDate">
+      <wsdl:input message="s0:GetFirstTransbyDateIn" />
+      <wsdl:output message="s0:GetFirstTransbyDateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFirstTransbyDateJS">
+      <wsdl:input message="s0:GetFirstTransbyDateJSIn" />
+      <wsdl:output message="s0:GetFirstTransbyDateJSOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNextTransbyDate">
+      <wsdl:input message="s0:GetNextTransbyDateIn" />
+      <wsdl:output message="s0:GetNextTransbyDateOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransRangeByDateJS">
+      <wsdl:input message="s0:GetTransRangeByDateJSIn" />
+      <wsdl:output message="s0:GetTransRangeByDateJSOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSecureTrackingTransaction">
+      <wsdl:input message="s0:GetSecureTrackingTransactionIn" />
+      <wsdl:output message="s0:GetSecureTrackingTransactionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Invoke">
+      <wsdl:input message="s0:InvokeIn" />
+      <wsdl:output message="s0:InvokeOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSalesOrder">
+      <wsdl:input message="s0:ValidateSalesOrderIn" />
+      <wsdl:output message="s0:ValidateSalesOrderOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelSalesOrder">
+      <wsdl:input message="s0:CancelSalesOrderIn" />
+      <wsdl:output message="s0:CancelSalesOrderOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTransactionCharges">
+      <wsdl:input message="s0:SetTransactionChargesIn" />
+      <wsdl:output message="s0:SetTransactionChargesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePOD">
+      <wsdl:input message="s0:UpdatePODIn" />
+      <wsdl:output message="s0:UpdatePODOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ApproveOrder">
+      <wsdl:input message="s0:ApproveOrderIn" />
+      <wsdl:output message="s0:ApproveOrderOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitPickupOrder">
+      <wsdl:input message="s0:SubmitPickupOrderIn" />
+      <wsdl:output message="s0:SubmitPickupOrderOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAttachment">
+      <wsdl:input message="s0:SetAttachmentIn" />
+      <wsdl:output message="s0:SetAttachmentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAttachments">
+      <wsdl:input message="s0:GetAllAttachmentsIn" />
+      <wsdl:output message="s0:GetAllAttachmentsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetParentEntity">
+      <wsdl:input message="s0:SetParentEntityIn" />
+      <wsdl:output message="s0:SetParentEntityOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CSSoapServiceSoap" type="s0:CSSoapServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="TestConnection">
+      <soap:operation soapAction="#TestConnection" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartTracking">
+      <soap:operation soapAction="#StartTracking" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrackingTransaction">
+      <soap:operation soapAction="#GetTrackingTransaction" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachment">
+      <soap:operation soapAction="#GetAttachment" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <soap:operation soapAction="#GetDocument" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvitationFromPeer">
+      <soap:operation soapAction="#InvitationFromPeer" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AnswerInvitation">
+      <soap:operation soapAction="#AnswerInvitation" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AnswerInvitation2">
+      <soap:operation soapAction="#AnswerInvitation2" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartSession">
+      <soap:operation soapAction="#StartSession" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndSession">
+      <soap:operation soapAction="#EndSession" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransaction">
+      <soap:operation soapAction="#GetTransaction" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTransaction">
+      <soap:operation soapAction="#SetTransaction" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransRangeByDate">
+      <soap:operation soapAction="#GetTransRangeByDate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTransaction">
+      <soap:operation soapAction="#DeleteTransaction" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenameTransaction">
+      <soap:operation soapAction="#RenameTransaction" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkingPorts">
+      <soap:operation soapAction="#GetWorkingPorts" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTripSchedule">
+      <soap:operation soapAction="#GetTripSchedule" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BookingRequest">
+      <soap:operation soapAction="#BookingRequest" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartTracking2">
+      <soap:operation soapAction="#StartTracking2" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPackageTypes">
+      <soap:operation soapAction="#GetPackageTypes" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelBooking">
+      <soap:operation soapAction="#CancelBooking" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomFieldDefinitions">
+      <soap:operation soapAction="#GetCustomFieldDefinitions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemFromVIN">
+      <soap:operation soapAction="#GetItemFromVIN" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShipmentStatus">
+      <soap:operation soapAction="#SetShipmentStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMagayaDocument">
+      <soap:operation soapAction="#GetMagayaDocument" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingTransactions">
+      <soap:operation soapAction="#GetAccountingTransactions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelatedTransactions">
+      <soap:operation soapAction="#GetRelatedTransactions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountDefinitions">
+      <soap:operation soapAction="#GetAccountDefinitions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChargeDefinitions">
+      <soap:operation soapAction="#GetChargeDefinitions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveCurrencies">
+      <soap:operation soapAction="#GetActiveCurrencies" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryLog">
+      <soap:operation soapAction="#QueryLog" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPODData">
+      <soap:operation soapAction="#GetPODData" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientRates">
+      <soap:operation soapAction="#GetClientRates" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStandardRates">
+      <soap:operation soapAction="#GetStandardRates" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientChargeDefinitions">
+      <soap:operation soapAction="#GetClientChargeDefinitions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRate">
+      <soap:operation soapAction="#SetRate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetEntity">
+      <soap:operation soapAction="#SetEntity" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntities">
+      <soap:operation soapAction="#GetEntities" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityContacts">
+      <soap:operation soapAction="#GetEntityContacts" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitSalesOrder">
+      <soap:operation soapAction="#SubmitSalesOrder" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitCargoRelease">
+      <soap:operation soapAction="#SubmitCargoRelease" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitShipment">
+      <soap:operation soapAction="#SubmitShipment" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventDefinitions">
+      <soap:operation soapAction="#GetEventDefinitions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTransactionEvents">
+      <soap:operation soapAction="#SetTransactionEvents" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrder">
+      <soap:operation soapAction="#UpdateOrder" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCustomFieldValue">
+      <soap:operation soapAction="#SetCustomFieldValue" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetApprovalStatus">
+      <soap:operation soapAction="#SetApprovalStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarrierRates">
+      <soap:operation soapAction="#GetCarrierRates" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityTransactions">
+      <soap:operation soapAction="#GetEntityTransactions" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryLogJS">
+      <soap:operation soapAction="#QueryLogJS" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExistsTransaction">
+      <soap:operation soapAction="#ExistsTransaction" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionStatus">
+      <soap:operation soapAction="#GetTransactionStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTrackingUser">
+      <soap:operation soapAction="#SetTrackingUser" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemDefinitionsByCustomer">
+      <soap:operation soapAction="#GetItemDefinitionsByCustomer" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInventoryItemsByItemDefinition">
+      <soap:operation soapAction="#GetInventoryItemsByItemDefinition" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionsByBillingClient">
+      <soap:operation soapAction="#GetTransactionsByBillingClient" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntitiesOfType">
+      <soap:operation soapAction="#GetEntitiesOfType" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWebDocument">
+      <soap:operation soapAction="#GetWebDocument" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFirstTransbyDate">
+      <soap:operation soapAction="#GetFirstTransbyDate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFirstTransbyDateJS">
+      <soap:operation soapAction="#GetFirstTransbyDateJS" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNextTransbyDate">
+      <soap:operation soapAction="#GetNextTransbyDate" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransRangeByDateJS">
+      <soap:operation soapAction="#GetTransRangeByDateJS" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSecureTrackingTransaction">
+      <soap:operation soapAction="#GetSecureTrackingTransaction" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Invoke">
+      <soap:operation soapAction="#Invoke" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSalesOrder">
+      <soap:operation soapAction="#ValidateSalesOrder" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelSalesOrder">
+      <soap:operation soapAction="#CancelSalesOrder" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTransactionCharges">
+      <soap:operation soapAction="#SetTransactionCharges" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePOD">
+      <soap:operation soapAction="#UpdatePOD" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApproveOrder">
+      <soap:operation soapAction="#ApproveOrder" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitPickupOrder">
+      <soap:operation soapAction="#SubmitPickupOrder" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAttachment">
+      <soap:operation soapAction="#SetAttachment" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAttachments">
+      <soap:operation soapAction="#GetAllAttachments" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetParentEntity">
+      <soap:operation soapAction="#SetParentEntity" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:CSSoapService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CSSoapService">
+    <wsdl:port name="CSSoapServiceSoap" binding="s0:CSSoapServiceSoap">
+      <soap:address location="http://Oscar:80/Invoke?Handler=CSSoapService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

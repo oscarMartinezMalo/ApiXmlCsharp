@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WarehouseReceipt xmlns="http://www.magaya.com/XMLSchema/V1" Type="WH">
+  <CreatedOn></CreatedOn>
+  <Number></Number>
+  <CreatedByName></CreatedByName>
+  <ShipperName></ShipperName>
+  <ConsigneeName></ConsigneeName>
+  <Items>
+    <Item Type="WI">
+      <Status></Status>
+      <PackageName></PackageName>
+      <Pieces></Pieces>
+      <Description></Description>
+      <Length Unit="in"></Length>
+      <Height Unit="in"></Height>
+      <Width Unit="in"></Width>
+      <Weight Unit="lb"></Weight>
+      <Volume Unit="ft3"></Volume>
+    </Item>
+  </Items>
+</WarehouseReceipt>

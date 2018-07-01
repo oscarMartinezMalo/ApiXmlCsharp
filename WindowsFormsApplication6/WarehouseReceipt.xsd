@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WarehouseReceipt xmlns="http://www.magaya.com/XMLSchema/V1" GUID="72f0943f-245a-42cd-babc-bf9e449ee2b2" Type="WH">
+  <CreatedOn>2018-06-23T13:03:49-04:00</CreatedOn>
+  <Number>2</Number>
+  <CreatedByName>oscar</CreatedByName>
+  <Version>104</Version>
+  <IssuedByName>Oscar</IssuedByName>
+  <IssuedBy GUID="8af3a9dd-95e4-453e-8a90-91db4b65725a">
+    <Type>ForwardingAgent</Type>
+    <Name>Oscar</Name>
+    <CreatedOn>2018-06-21T19:11:05-04:00</CreatedOn>
+    <Address>
+      <ContactPhone>7867187946</ContactPhone>
+      <ContactEmail>lgala@magaya.com</ContactEmail>
+    </Address>
+    <Email>lgala@magaya.com</Email>
+    <Phone>7867187946</Phone>
+    <NetworkID>32636</NetworkID>
+    <IsKnownShipper>true</IsKnownShipper>
+    <IsPrepaid>true</IsPrepaid>
+  </IssuedBy>
+  <IssuedByAddress>
+    <ContactPhone>7867187946</ContactPhone>
+    <ContactEmail>lgala@magaya.com</ContactEmail>
+  </IssuedByAddress>
+  <ShipperName>PayCargo LLC</ShipperName>
+  <Shipper GUID="0ca6576f-d9c4-4826-bc4b-af0e0616a516">
+    <Type>Vendor</Type>
+    <Name>PayCargo LLC</Name>
+    <CreatedOn>2018-06-21T19:14:24-04:00</CreatedOn>
+    <Address>
+      <Street>2100 Salzedo Street</Street>
+      <Street>Suite 200</Street>
+      <City>Coral Gables</City>
+      <State>FL</State>
+      <ZipCode>33134</ZipCode>
+      <Country>United States</Country>
+    </Address>
+    <BillingAddress>
+      <Street>2100 Salzedo Street</Street>
+      <Street>Suite 200</Street>
+      <City>Coral Gables</City>
+      <State>FL</State>
+      <ZipCode>33134</ZipCode>
+      <Country>United States</Country>
+    </BillingAddress>
+    <Email>sales@paycargo.com</Email>
+    <Website>www.paycargo.com</Website>
+    <Phone>1-888-250-7778</Phone>
+    <IsPrepaid>true</IsPrepaid>
+  </Shipper>
+  <ShipperAddress>
+    <Street>2100 Salzedo Street</Street>
+    <Street>Suite 200</Street>
+    <City>Coral Gables</City>
+    <State>FL</State>
+    <ZipCode>33134</ZipCode>
+    <Country>United States</Country>
+  </ShipperAddress>
+  <Items>
+    <Item GUID="9af73512-c944-4f23-b718-8931e2c1cdd7" Type="WI">
+      <Version>105</Version>
+      <Status>OnHand</Status>
+      <Package>
+        <Type>Case</Type>
+        <Code>CAS</Code>
+        <Name>Case</Name>
+      </Package>
+      <PackageName>Case</PackageName>
+      <Pieces>1</Pieces>
+      <Description>Part Description 2</Description>
+      <Length Unit="in">0.0099999999999999985</Length>
+      <Height Unit="in">500.00</Height>
+      <Width Unit="in">50.00</Width>
+      <Weight Unit="lb">10.00</Weight>
+      <ContainedPiecesWeightIncluded>true</ContainedPiecesWeightIncluded>
+      <Volume Unit="ft3">0.14000000000000001</Volume>
+      <VolumeWeight Unit="vlb">1.4573493975903606</VolumeWeight>
+      <PieceWeight Unit="lb">10.00</PieceWeight>
+      <PieceVolume Unit="ft3">0.14000000000000001</PieceVolume>
+      <PieceQuantity>0.00</PieceQuantity>
+      <IsSummarized>false</IsSummarized>
+      <QuantityUnit>EACH</QuantityUnit>
+      <Model>Model</Model>
+      <PartNumber>PART456</PartNumber>
+      <WarehouseReceiptGUID>72f0943f-245a-42cd-babc-bf9e449ee2b2</WarehouseReceiptGUID>
+      <WHRItemID>1</WHRItemID>
+      <LocationCode>QC1</LocationCode>
+      <Location Code="QC1">
+        <Type>Storage</Type>
+        <NetworkID>32636</NetworkID>
+        <WarehouseZoneName>Default Zone</WarehouseZoneName>
+        <IsDisabled>false</IsDisabled>
+      </Location>
+      <IncludeInSED>false</IncludeInSED>
+      <IsContainer>false</IsContainer>
+      <WarehouseReceiptNumber>2</WarehouseReceiptNumber>
+      <OrderIndex>1</OrderIndex>
+      <IsPallet>false</IsPallet>
+      <IsOverstock>false</IsOverstock>
+      <NotLoaded>false</NotLoaded>
+      <InTask>false</InTask>
+      <EntryDate>2018-06-23T13:03:49-04:00</EntryDate>
+    </Item>
+  </Items>
+  <MeasurementUnits>
+    <LengthUnit>in</LengthUnit>
+    <VolumeUnit>ft3</VolumeUnit>
+    <WeightUnit>lb</WeightUnit>
+    <VolumeWeightUnit>vlb</VolumeWeightUnit>
+    <AreaUnit>ft2</AreaUnit>
+    <LengthPrecision>2</LengthPrecision>
+    <VolumePrecision>2</VolumePrecision>
+    <WeightPrecision>2</WeightPrecision>
+    <VolumeWeightPrecision>2</VolumeWeightPrecision>
+    <AreaPrecision>2</AreaPrecision>
+    <VolumeWeightFactor>166.00</VolumeWeightFactor>
+  </MeasurementUnits>
+  <CreatorNetworkID>32636</CreatorNetworkID>
+  <Events>
+    <Event>
+      <Date>2018-06-23T13:08:52-04:00</Date>
+      <EventDefinition>
+        <Name>Arrived at warehouse</Name>
+        <IncludeInTracking>true</IncludeInTracking>
+      </EventDefinition>
+      <IncludeInTracking>true</IncludeInTracking>
+      <OwnerType>WH</OwnerType>
+      <OwnerNumber>2</OwnerNumber>
+      <OwnerGUID>72f0943f-245a-42cd-babc-bf9e449ee2b2</OwnerGUID>
+    </Event>
+  </Events>
+  <TotalPieces>1</TotalPieces>
+  <TotalWeight Unit="lb">10.00</TotalWeight>
+  <TotalVolume Unit="ft3">0.14000000000000001</TotalVolume>
+  <TotalVolumeWeight Unit="vlb">1.4573493975903606</TotalVolumeWeight>
+  <ChargeableWeight Unit="lb">10.00</ChargeableWeight>
+  <TotalValue Currency="USD">0.00</TotalValue>
+  <SupplierName>Default Tax Authority</SupplierName>
+  <Supplier GUID="03009280-6fb7-46b7-8bbf-e63af644ad58">
+    <Type>Vendor</Type>
+    <Name>Default Tax Authority</Name>
+    <CreatedOn>2018-06-21T19:11:06-04:00</CreatedOn>
+    <IsPrepaid>true</IsPrepaid>
+  </Supplier>
+  <Status>OnHand</Status>
+  <HasAttachments>false</HasAttachments>
+  <LastItemID>1</LastItemID>
+  <IsOnline>false</IsOnline>
+  <IsLiquidated>false</IsLiquidated>
+</WarehouseReceipt>

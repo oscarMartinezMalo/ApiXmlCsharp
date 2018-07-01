@@ -1,0 +1,37 @@
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Debug\WindowsFormsApplication6.exe.config
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Debug\WindowsFormsApplication6.exe
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Debug\WindowsFormsApplication6.pdb
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Debug\ExcelDataReader.dll
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Debug\ExcelDataReader.xml
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\MagayaApi.csprojResolveAssemblyReference.cache
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.Form1.resources
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.Properties.Resources.resources
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\MagayaApi.csproj.GenerateResource.Cache
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.exe
+C:\Users\Malo\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.pdb
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\bin\Debug\WindowsFormsApplication6.exe.config
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.exe
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.pdb
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\bin\Debug\WindowsFormsApplication6.exe
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\bin\Debug\WindowsFormsApplication6.pdb
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\bin\Debug\ExcelDataReader.dll
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\bin\Debug\ExcelDataReader.xml
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\MagayaApi.csprojResolveAssemblyReference.cache
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.Form1.resources
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.Properties.Resources.resources
+C:\Users\Malo\Desktop\WindowsFormsApplication6\WindowsFormsApplication6\obj\Debug\MagayaApi.csproj.GenerateResource.Cache
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\bin\Debug\WindowsFormsApplication6.exe.config
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.exe
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.pdb
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\bin\Debug\WindowsFormsApplication6.exe
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\bin\Debug\WindowsFormsApplication6.pdb
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\bin\Debug\ExcelDataReader.dll
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\bin\Debug\ExcelDataReader.xml
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\obj\Debug\MagayaApi.csprojResolveAssemblyReference.cache
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.Form1.resources
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.Properties.Resources.resources
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\obj\Debug\MagayaApi.csproj.GenerateResource.Cache
+C:\Users\Malo\Desktop\VS2015 APP C# test\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.Access.resources
+C:\Users\Malo\Source\Repos\ApiXmlCsharp\WindowsFormsApplication6\bin\Debug\WindowsFormsApplication6.exe.config
+C:\Users\Malo\Source\Repos\ApiXmlCsharp\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.exe
+C:\Users\Malo\Source\Repos\ApiXmlCsharp\WindowsFormsApplication6\obj\Debug\WindowsFormsApplication6.pdb
